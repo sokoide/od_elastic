@@ -35,7 +35,7 @@ services:
         hard: 65536
     volumes:
       - odfe-data1:/usr/share/elasticsearch/data
-      - ./config.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/config.yml
+      # - ./config.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/config.yml
     ports:
       - 9200:9200
       - 9600:9600 # required for Performance Analyzer
@@ -62,7 +62,7 @@ services:
         hard: 65536
     volumes:
       - odfe-data2:/usr/share/elasticsearch/data
-      - ./config.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/config.yml
+      # - ./config.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/config.yml
     depends_on:
       - kdc
     networks:
