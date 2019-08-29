@@ -1,0 +1,58 @@
+# opendistro_security.kerberos.krb5_filepath: '/etc/krb5.conf'
+# opendistro_security.kerberos.acceptor_keytab_filepath: 'odfe-node1.keytab'
+# opendistro_security.kerberos.acceptor_principal: 'HTTP/odfe-node1'
+# minimum_master_nodes need to be explicitly set when bound on a public IP
+# set to 1 to allow single node clusters
+discovery.zen.minimum_master_nodes: 1
+
+######## Start OpenDistro for Elasticsearch Security Demo Configuration ########
+# WARNING: revise all the lines below before you go into production
+# opendistro_security.ssl.transport.pemcert_filepath: esnode.pem
+# opendistro_security.ssl.transport.pemkey_filepath: esnode-key.pem
+opendistro_security.ssl.transport.pemcert_filepath: node.pem
+opendistro_security.ssl.transport.pemkey_filepath: node-key.pem
+opendistro_security.ssl.transport.pemtrustedcas_filepath: root-ca.pem
+opendistro_security.ssl.transport.enforce_hostname_verification: false
+opendistro_security.ssl.http.enabled: true
+# opendistro_security.ssl.http.pemcert_filepath: esnode.pem
+# opendistro_security.ssl.http.pemkey_filepath: esnode-key.pem
+opendistro_security.ssl.http.pemcert_filepath: node.pem
+opendistro_security.ssl.http.pemkey_filepath: node-key.pem
+opendistro_security.ssl.http.pemtrustedcas_filepath: root-ca.pem
+opendistro_security.allow_unsafe_democertificates: true
+opendistro_security.allow_default_init_securityindex: true
+opendistro_security.authcz.admin_dn:
+  - CN=kirk,OU=client,O=client,L=test, C=de
+  - CN=odfe-name1,O=Internet Widgits Pty Ltd,ST=Some-State,C=JP
+# opendistro_security.audit.type: internal_elasticsearch
+# opendistro_security.enable_snapshot_restore_privilege: true
+# opendistro_security.check_snapshot_restore_write_privileges: true
+opendistro_security.restapi.roles_enabled: ["all_access", "security_rest_api_access"]
+# cluster.routing.allocation.disk.threshold_enabled: false
+# node.max_local_storage_nodes: 3
+######## End OpenDistro for Elasticsearch Security Demo Configuration ########
+#
+node.name: node-1
+discovery.seed_hosts: ["node1"]
+cluster.initial_master_nodes: ["node-1"]
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+
+############## Kerberos configuration settings ##############
+# If Kerberos authentication should be used you have to configure:
+
+# The Path to the krb5.conf file
+# Can be absolute or relative to the Elasticsearch config directory
+#opendistro_security.kerberos.krb5_filepath: '/etc/krb5.conf'
+opendistro_security.kerberos.krb5_filepath: '/etc/krb5.conf'
+
+# The Path to the keytab where the acceptor_principal credentials are stored.
+# Must be relative to the Elasticsearch config directory
+#opendistro_security.kerberos.acceptor_keytab_filepath: 'eskeytab.tab'
+# opendistro_security.kerberos.acceptor_keytab_filepath: 'odfe-node1.keytab'
+opendistro_security.kerberos.acceptor_keytab_filepath: 'ip-172-18-40-101.keytab'
+
+# Acceptor (Server) Principal name, must be present in acceptor_keytab_path file
+# opendistro_security.kerberos.acceptor_principal: 'HTTP/localhost'
+#opendistro_security.kerberos.acceptor_principal: 'HTTP/odfe-node1'
+opendistro_security.kerberos.acceptor_principal: 'HTTP/ip-172-18-40-101'
