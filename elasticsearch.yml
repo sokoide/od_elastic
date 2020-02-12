@@ -22,8 +22,7 @@ opendistro_security.ssl.http.pemtrustedcas_filepath: root-ca.pem
 opendistro_security.allow_unsafe_democertificates: true
 opendistro_security.allow_default_init_securityindex: true
 opendistro_security.authcz.admin_dn:
-  - CN=kirk,OU=client,O=client,L=test, C=de
-  - CN=odfe-name1,O=Internet Widgits Pty Ltd,ST=Some-State,C=JP
+  - CN=ADMIN,OU=IT,O=Sokoide Inc,L=Tokyo,ST=Tokyo,C=JP
 # opendistro_security.audit.type: internal_elasticsearch
 # opendistro_security.enable_snapshot_restore_privilege: true
 # opendistro_security.check_snapshot_restore_write_privileges: true
@@ -32,9 +31,9 @@ opendistro_security.restapi.roles_enabled: ["all_access", "security_rest_api_acc
 # node.max_local_storage_nodes: 3
 ######## End OpenDistro for Elasticsearch Security Demo Configuration ########
 #
-node.name: node-1
-discovery.seed_hosts: ["node1"]
-cluster.initial_master_nodes: ["node-1"]
+node.name: odfe-node1
+discovery.seed_hosts: ["odfe-node1"]
+cluster.initial_master_nodes: ["odfe-node1"]
 cluster.name: "docker-cluster"
 network.host: 0.0.0.0
 
@@ -50,9 +49,9 @@ opendistro_security.kerberos.krb5_filepath: '/etc/krb5.conf'
 # Must be relative to the Elasticsearch config directory
 #opendistro_security.kerberos.acceptor_keytab_filepath: 'eskeytab.tab'
 # opendistro_security.kerberos.acceptor_keytab_filepath: 'odfe-node1.keytab'
-opendistro_security.kerberos.acceptor_keytab_filepath: 'ip-172-18-40-101.keytab'
+opendistro_security.kerberos.acceptor_keytab_filepath: 'http.keytab'
 
 # Acceptor (Server) Principal name, must be present in acceptor_keytab_path file
 # opendistro_security.kerberos.acceptor_principal: 'HTTP/localhost'
 #opendistro_security.kerberos.acceptor_principal: 'HTTP/odfe-node1'
-opendistro_security.kerberos.acceptor_principal: 'HTTP/ip-172-18-40-101'
+opendistro_security.kerberos.acceptor_principal: 'HTTP/sokoide-elastic'

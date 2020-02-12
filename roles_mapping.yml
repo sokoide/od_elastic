@@ -16,7 +16,8 @@ all_access:
   - "admin"
   users:
   - "admin"
-  - "scott"
+  - "sokoide"
+  - "sandy"
   description: "Maps admin to all_access"
 
 own_index:

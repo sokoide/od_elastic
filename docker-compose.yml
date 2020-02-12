@@ -10,16 +10,15 @@ services:
       - "749:749"
     environment:
       KRB5_REALM: REALM.SOKOIDE.COM
-      KRB5_KDC: 172.18.40.101
+      KRB5_KDC: 10.0.0.7
       KRB5_PASS: admin
     volumes:
-      #- krb5kdc-data:/var/lib/krb5kdc
       - ./krb5kdc:/var/lib/krb5kdc
       - ./keytabs:/var/spool/keytabs
     networks:
       - odfe-net
   odfe-node1:
-    image: amazon/opendistro-for-elasticsearch:1.1.0
+    image: amazon/opendistro-for-elasticsearch:1.4.0
     container_name: odfe-node1
     environment:
       - discovery.seed_hosts=odfe-node1
@@ -36,7 +35,7 @@ services:
     volumes:
       - odfe-data1:/usr/share/elasticsearch/data
       - ./krb5.conf:/etc/krb5.conf
-      - ./keytabs/ip-172-18-40-101.keytab:/usr/share/elasticsearch/config/ip-172-18-40-101.keytab
+      - ./keytabs/http.keytab:/usr/share/elasticsearch/config/http.keytab
       - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./config.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/config.yml
       - ./roles_mapping.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml
@@ -53,7 +52,7 @@ services:
     networks:
       - odfe-net
   # odfe-node2:
-  #   image: amazon/opendistro-for-elasticsearch:1.1.0
+  #   image: amazon/opendistro-for-elasticsearch:1.4.0
   #   container_name: odfe-node2
   #   environment:
   #     - cluster.name=odfe-cluster
@@ -78,7 +77,7 @@ services:
   #   networks:
   #     - odfe-net
   # kibana:
-  #   image: amazon/opendistro-for-elasticsearch-kibana:1.1.0
+  #   image: amazon/opendistro-for-elasticsearch-kibana:1.4.0
   #   container_name: odfe-kibana
   #   ports:
   #     - 5601:5601
@@ -94,8 +93,7 @@ services:
 
 volumes:
   odfe-data1:
-  odfe-data2:
-  krb5kdc-data:
+  # odfe-data2:
 
 networks:
   odfe-net:
